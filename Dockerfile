@@ -9,4 +9,4 @@ RUN pip install --no-cache-dir -r requirements.txt \
 COPY . /usr/src/app/
 
 EXPOSE 80
-CMD ["gunicorn", "src.app:app", "--bind", "0.0.0.0:80", "--timeout", "30"]
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:80", "--timeout", "30"]
