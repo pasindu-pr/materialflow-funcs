@@ -131,7 +131,19 @@ class Predict(Resource):
         print(earlyPurchaseExpectProfit)
         print(extraProfitFromEarlyPurchase) 
 
-        return jsonify({'prediction': pred, 'extraProfitFromEarlyPurchase': extraProfitFromEarlyPurchase, 'message': message})
+        returnTypes = {
+            'prediction': pred, 
+            'extraProfitFromEarlyPurchase': extraProfitFromEarlyPurchase, 
+            'message': message,
+            'retail_price': retail_price,
+            'newCurrentWholesalePrice': newCurrentWholesalePrice,
+            'newFutureWholesalePrice': newFutureWholesalePrice,
+            'sellerCurrentProfit': sellerCurrentProfit,
+            'sellerFutureProfit': sellerFutureProfit,
+            'earlyPurchaseExpectProfit': earlyPurchaseExpectProfit
+        }
+
+        return jsonify(returnTypes)
 
     @staticmethod
     def prediction(lst):
