@@ -18,7 +18,7 @@ class Products(Resource):
         str_data = data.decode("utf-8")
         json_data = json.loads(str_data)
         print(json_data)
-        df = pd.DataFrame(json_data)
+        df = pd.DataFrame(json_data['transactions'])
         print(df)
 
         data = {
@@ -34,7 +34,7 @@ class Products(Resource):
         df = pd.DataFrame(data)
         print(df)
 
-        df['date'] = pd.to_datetime(df['date'])
+        df['date'] = pd.to_datetime(df['date'], format='mixed')
 
         current_date = df['date'].max()
         customer_rfm = df.groupby('customer_id').agg({
@@ -100,9 +100,12 @@ class Products(Resource):
             
             return products
 
-        user_id_to_compare = 1
+        user_id_to_compare = json_data['user']
         products = recommend_products_for_customer(user_id_to_compare,df)
         print(products)
+
+        if(products == None):
+            return jsonify([])
 
         products = [int(product) for product in products]
         return jsonify(products)
