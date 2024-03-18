@@ -9,9 +9,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import joblib
 import pickle
- 
-
-app = Flask(__name__) 
 
 class Predict(Resource):
     def post(self):
